@@ -1,0 +1,60 @@
+[32m23:43:38 (14894) INFO ProjectReader[39m Found 2 of 33 file(s) to be mutated.
+[32m23:43:38 (14894) INFO Instrumenter[39m Instrumented 2 source file(s) with 37 mutant(s)
+[32m23:43:38 (14894) INFO ConcurrencyTokenProvider[39m Creating 2 test runner process(es).
+[32m23:43:39 (14894) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m23:43:39 (14894) INFO DryRunExecutor[39m Starting initial test run (jest test runner with "perTest" coverage analysis). This may take a while.
+[32m23:43:41 (14894) INFO DryRunExecutor[39m Initial test run succeeded. Ran 33 tests in 1 second (net 29 ms, overhead 1166 ms).
+Mutation testing 79% (elapsed: <1m, remaining: <1m) 30/37 tested (0 survived, 0 timed out)
+
+All tests
+  CheckoutService.test.js
+    ✓ CheckoutService Caminho N4 — pagamento APROVADO (caminho feliz) deve retornar o pedido salvo com status PROCESSADO [line 85] (killed 10)
+    ~ CheckoutService Caminho N4 — pagamento APROVADO (caminho feliz) deve salvar o pedido no repositório exatamente uma vez [line 93] (covered 23)
+    ✓ CheckoutService Caminho N4 — pagamento APROVADO (caminho feliz) MOCK — deve disparar o e-mail de confirmação para o cliente (comportamento) [line 102] (killed 2)
+    ~ CheckoutService Caminho N4 — pagamento APROVADO (caminho feliz) deve chamar o gateway com o valor e cartão do pedido [line 115] (covered 23)
+    ✓ CheckoutService Caminho N5 — pagamento RECUSADO (falha de negócio) deve retornar null quando o cartão é recusado [line 138] (killed 3)
+    ✓ CheckoutService Caminho N5 — pagamento RECUSADO (falha de negócio) deve salvar o pedido com status FALHOU [line 144] (killed 1)
+    ~ CheckoutService Caminho N5 — pagamento RECUSADO (falha de negócio) MOCK — NÃO deve enviar e-mail quando o pagamento falha (comportamento crítico) [line 153] (covered 21)
+    ✓ CheckoutService Caminho N6 — ERRO_GATEWAY (falha de infraestrutura / catch) deve retornar null quando o gateway lança exceção [line 178] (killed 1)
+    ✓ CheckoutService Caminho N6 — ERRO_GATEWAY (falha de infraestrutura / catch) deve salvar o pedido com status ERRO_GATEWAY [line 184] (killed 1)
+    ~ CheckoutService Caminho N6 — ERRO_GATEWAY (falha de infraestrutura / catch) MOCK — NÃO deve enviar e-mail quando há erro de infraestrutura [line 193] (covered 18)
+    ~ CheckoutService Caminho N6 — ERRO_GATEWAY (falha de infraestrutura / catch) deve tratar a exceção sem relançá-la (falha controlada) [line 201] (covered 18)
+    ✓ CheckoutService PedidoBuilder — Data Builder Pattern deve construir pedido com valores padrão sensatos [line 209] (killed 3)
+    ~ CheckoutService PedidoBuilder — Data Builder Pattern deve permitir sobrescrever apenas o e-mail [line 218] (covered 10)
+    ✓ CheckoutService PedidoBuilder — Data Builder Pattern deve construir pedido sem e-mail para testar validação [line 225] (killed 1)
+    ✓ CheckoutService PedidoBuilder — Data Builder Pattern deve construir pedido sem cartão para testar validação [line 231] (killed 1)
+  mutant-killers.test.js
+    ✓ PedidoBuilder — campos do cartão padrão (mata M1, M2, M3, M4) cartão padrão deve ter número não vazio [line 5] (killed 3)
+    ✓ PedidoBuilder — campos do cartão padrão (mata M1, M2, M3, M4) cartão padrão deve ter validade não vazia [line 10] (killed 1)
+    ✓ PedidoBuilder — campos do cartão padrão (mata M1, M2, M3, M4) cartão padrão deve ter CVV não vazio [line 15] (killed 1)
+    ~ PedidoBuilder — campos do cartão padrão (mata M1, M2, M3, M4) cartão padrão deve ter todas as três propriedades preenchidas [line 20] (covered 9)
+    ✓ PedidoBuilder — comCartao() (mata NC1) comCartao deve substituir o cartão padrão pelo informado [line 33] (killed 1)
+    ~ PedidoBuilder — comCartao() (mata NC1) comCartao não deve afetar os outros campos do pedido [line 39] (covered 10)
+    ✓ PedidoBuilder — semValor() (mata NC2) semValor deve definir valor como null [line 48] (killed 1)
+    ~ PedidoBuilder — semValor() (mata NC2) semValor não deve afetar os outros campos do pedido [line 52] (covered 10)
+    ✓ CheckoutService — tratamento de falha no e-mail (mata M5) deve logar erro quando o envio de e-mail falha, sem derrubar o fluxo [line 60] (killed 4)
+    ✓ CheckoutService — mensagem de erro do gateway (mata M6) deve logar mensagem específica quando o gateway falha [line 78] (killed 2)
+  validarPayload.test.js
+    ✘ validarPayload — RF01 (Validação de Entrada) deve retornar array vazio para payload completamente válido [line 15] (covered 0)
+    ✘ validarPayload — RF01 (Validação de Entrada) deve rejeitar e-mail sem @ [line 25] (covered 0)
+    ✘ validarPayload — RF01 (Validação de Entrada) deve rejeitar e-mail ausente [line 35] (covered 0)
+    ✘ validarPayload — RF01 (Validação de Entrada) deve rejeitar valor zero [line 45] (covered 0)
+    ✘ validarPayload — RF01 (Validação de Entrada) deve rejeitar valor negativo [line 55] (covered 0)
+    ✘ validarPayload — RF01 (Validação de Entrada) deve rejeitar cartão ausente [line 65] (covered 0)
+    ✘ validarPayload — RF01 (Validação de Entrada) deve rejeitar cartão sem CVV [line 75] (covered 0)
+    ✘ validarPayload — RF01 (Validação de Entrada) deve acumular múltiplos erros quando vários campos são inválidos [line 85] (covered 0)
+
+Ran 11.51 tests per mutant on average.
+---------------------|------------------|----------|-----------|------------|----------|----------|
+                     | % Mutation score |          |           |            |          |          |
+File                 |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+---------------------|--------|---------|----------|-----------|------------|----------|----------|
+All files            | 100.00 |  100.00 |       36 |         0 |          0 |        0 |        1 |
+ builders            | 100.00 |  100.00 |       16 |         0 |          0 |        0 |        0 |
+  PedidoBuilder.js   | 100.00 |  100.00 |       16 |         0 |          0 |        0 |        0 |
+ services            | 100.00 |  100.00 |       20 |         0 |          0 |        0 |        1 |
+  CheckoutService.js | 100.00 |  100.00 |       20 |         0 |          0 |        0 |        1 |
+---------------------|--------|---------|----------|-----------|------------|----------|----------|
+[32m23:43:53 (14894) INFO MutationTestReportHelper[39m Final mutation score of 100.00 is greater than or equal to break threshold 80
+[32m23:43:53 (14894) INFO HtmlReporter[39m Your report can be found at: file:///workspaces/o-apocalipse-do-delivery/reports/mutation/mutation.html
+[32m23:43:53 (14894) INFO MutationTestExecutor[39m Done in 15 seconds.

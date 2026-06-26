@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest --coverage",
+    "bdd": "cucumber-js",
+    "mutation": "stryker run",
     "start": "node src/server.js"
   },
   "dependencies": {

@@ -1,0 +1,8 @@
+services:
+  toxiproxy:
+    image: ghcr.io/shopify/toxiproxy:2.9.0
+    container_name: entregasja-toxiproxy
+    ports:
+      - "8474:8474"   # API de controle do Toxiproxy
+      - "21000:21000" # porta do proxy que o checkout usará para falar com o gateway
+    command: ["-host", "0.0.0.0"]

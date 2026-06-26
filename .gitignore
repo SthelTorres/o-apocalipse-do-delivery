@@ -24,6 +24,10 @@ lerna-debug.log*
 coverage/
 .nyc_output/
 
+# Stryker (mutation testing) — pasta temporária
+.stryker-tmp/
+reports/stryker-incremental.json
+
 # Builds e artefatos de saída (Next.js, Nuxt, Vite, TSC, etc.)
 dist/
 build/
